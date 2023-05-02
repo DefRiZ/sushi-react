@@ -1,8 +1,24 @@
 import React from "react";
+//REDUX
+import { useSelector, useDispatch } from "react-redux";
+import { setSortType } from "../../store/slices/filterSlice";
+//Створюємо динамічний список з елементами поп-апу
+const list = [
+  { name: "популярністю", sortProperty: "rating" },
+  { name: "ціною", sortProperty: "price" },
+  { name: "алфавітом", sortProperty: "title" },
+];
 
 const Sort = () => {
+  const { sort } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
+  const onClickSort = (object) => {
+    dispatch(setSortType(object));
+  };
+  //Функціонал відкр/закрити поп-ап
+  const [open, setOpen] = React.useState(false);
   return (
-    <div class="sort">
+    <div onClick={() => setOpen(!open)} class="sort">
       <div class="sort__label">
         <svg
           width="10"
@@ -17,15 +33,25 @@ const Sort = () => {
           />
         </svg>
         <b>Сортувати за:</b>
-        <span>популярністю</span>
+        <span>{sort.name}</span>
       </div>
-      <div class="sort__popup">
-        <ul>
-          <li class="active">популярністю</li>
-          <li>ціною</li>
-          <li>алфавітом</li>
-        </ul>
-      </div>
+      {open && (
+        <div class="sort__popup">
+          <ul>
+            {list.map((object, index) => (
+              <li
+                className={
+                  object.sortProperty === sort.sortProperty ? "active" : ""
+                }
+                onClick={() => onClickSort(object)}
+                key={index}
+              >
+                {object.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
