@@ -1,15 +1,11 @@
 import React from "react";
 
-const SushiBLock = () => {
+const SushiBLock = ({ id, imageUrl, title, price, category, rating }) => {
   return (
     <div class="sushi-block">
-      <img
-        class="sushi-block__image"
-        src="https://mafia.ua/storage/editor/fotos/450x450/dabl-fila_1681474527696.jpeg"
-        alt="Sushi"
-      />
-      <h4 class="sushi-block__title">Чизбургер-пицца</h4>
-      <div class="sushi-block__selector">
+      <img class="sushi-block__image" src={imageUrl} alt="Sushi" />
+      <h4 class="sushi-block__title">{title}</h4>
+      {/* <div class="sushi-block__selector">
         <ul>
           <li class="active">тонкое</li>
           <li>традиционное</li>
@@ -19,9 +15,9 @@ const SushiBLock = () => {
           <li>30 см.</li>
           <li>40 см.</li>
         </ul>
-      </div>
+      </div> */}
       <div class="sushi-block__bottom">
-        <div class="sushi-block__price">від 150 грн</div>
+        <div class="sushi-block__price">{price} грн</div>
         <div class="button button--outline button--add">
           <svg
             width="12"
