@@ -4,14 +4,22 @@ import Header from "./components/Header";
 import Categories from "./components/Categories";
 import SushiBLock from "./components/SushiBlock";
 import Sort from "./components/Sort";
+//REDUX
+import { useSelector } from "react-redux";
+//Axios
+import axios from "axios";
 
 function App() {
   const [items, setItems] = React.useState([]);
+  const { categoryId, sort } = useSelector((state) => state.filter);
   React.useEffect(() => {
-    fetch("https://6450e98be1f6f1bb22a255dc.mockapi.io/items")
-      .then((response) => response.json())
-      .then((json) => setItems(json));
-  }, []);
+    const category = categoryId > 0 ? `category=${categoryId}` : "";
+    axios
+      .get(
+        `https://6450e98be1f6f1bb22a255dc.mockapi.io/items?${category}&sortBy=${sort.sortProperty}`
+      )
+      .then((response) => setItems(response.data));
+  }, [categoryId, sort.sortProperty]);
 
   const sushiList = items.map((item) => <SushiBLock key={item.id} {...item} />);
 
