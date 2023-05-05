@@ -2,33 +2,49 @@ import React from "react";
 
 import Categories from "../components/Categories";
 import SushiBLock from "../components/SushiBlock";
+import Skeleton from "../components/Skeleton";
 import Sort from "../components/Sort";
 //REDUX
 import { useSelector } from "react-redux";
-//Axios
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { fetchSushi } from "../store/slices/sushiSlice";
 
 const Home = () => {
-  const [items, setItems] = React.useState([]);
+  // const [items, setItems] = React.useState([]);
+  const dispatch = useDispatch();
+  const { items, status } = useSelector((state) => state.sushi);
+  console.log(items);
   const { categoryId, sort } = useSelector((state) => state.filter);
   React.useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
-    axios
-      .get(
-        `https://6450e98be1f6f1bb22a255dc.mockapi.io/items?${category}&sortBy=${sort.sortProperty}`
-      )
-      .then((response) => setItems(response.data));
+    const sortType = sort.sortProperty;
+
+    dispatch(
+      fetchSushi({
+        category,
+        sortType,
+      })
+    );
   }, [categoryId, sort.sortProperty]);
 
   const sushiList = items.map((item) => <SushiBLock key={item.id} {...item} />);
+  const skeletonList = [...new Array(3)].map((_, i) => <Skeleton key={i} />);
   return (
     <div>
-      <div class="content__top">
+      <div className="content__top">
         <Categories />
         <Sort />
       </div>
-      <h2 class="content__title">Усі суші</h2>
-      <div class="content__items">{sushiList}</div>
+      <h2 className="content__title">Усі суші</h2>
+      <div className="content__items">
+        {status === "error" && (
+          <p>
+            Не вдалося завантажити список ролів. Будь ласка, спробуйте ще раз
+            через декілька хвилин.
+          </p>
+        )}
+        {status === "loading" ? skeletonList : sushiList}
+      </div>
     </div>
   );
 };

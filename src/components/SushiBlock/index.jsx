@@ -1,24 +1,21 @@
 import React from "react";
 
-const SushiBLock = ({ id, imageUrl, title, price, category, rating }) => {
+const SushiBLock = ({ id, imageUrl, title, price, quantity, weight }) => {
   return (
-    <div class="sushi-block">
-      <img class="sushi-block__image" src={imageUrl} alt="Sushi" />
-      <h4 class="sushi-block__title">{title}</h4>
-      {/* <div class="sushi-block__selector">
+    <div className="sushi-block">
+      <img className="sushi-block__image" src={imageUrl} alt="Sushi" />
+      <h4 className="sushi-block__title">{title}</h4>
+      <div className="sushi-block__selector">
         <ul>
-          <li class="active">тонкое</li>
-          <li>традиционное</li>
+          <li>{quantity} шт.</li>
         </ul>
         <ul>
-          <li class="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          <li>{weight} гр.</li>
         </ul>
-      </div> */}
-      <div class="sushi-block__bottom">
-        <div class="sushi-block__price">{price} грн</div>
-        <div class="button button--outline button--add">
+      </div>
+      <div className="sushi-block__bottom">
+        <div className="sushi-block__price">{price} грн</div>
+        <div className="button button--outline button--add">
           <svg
             width="12"
             height="12"
