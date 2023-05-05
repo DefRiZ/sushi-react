@@ -18,8 +18,8 @@ const Sort = () => {
   //Функціонал відкр/закрити поп-ап
   const [open, setOpen] = React.useState(false);
   return (
-    <div onClick={() => setOpen(!open)} class="sort">
-      <div class="sort__label">
+    <div onClick={() => setOpen(!open)} className="sort">
+      <div className="sort__label">
         <svg
           width="10"
           height="6"
@@ -36,7 +36,7 @@ const Sort = () => {
         <span>{sort.name}</span>
       </div>
       {open && (
-        <div class="sort__popup">
+        <div className="sort__popup">
           <ul>
             {list.map((object, index) => (
               <li
