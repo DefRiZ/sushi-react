@@ -4,6 +4,7 @@ import Categories from "../components/Categories";
 import SushiBLock from "../components/SushiBlock";
 import Skeleton from "../components/Skeleton";
 import Sort from "../components/Sort";
+import Pagination from "../components/Pagination";
 //REDUX
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -12,7 +13,9 @@ import { fetchSushi } from "../store/slices/sushiSlice";
 const Home = () => {
   const dispatch = useDispatch();
   const { items, status } = useSelector((state) => state.sushi);
-  const { categoryId, sort } = useSelector((state) => state.filter);
+  const { categoryId, sort, currentPage } = useSelector(
+    (state) => state.filter
+  );
   React.useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const sortType = sort.sortProperty;
@@ -21,9 +24,10 @@ const Home = () => {
       fetchSushi({
         category,
         sortType,
+        currentPage,
       })
     );
-  }, [categoryId, sort.sortProperty]);
+  }, [categoryId, sort.sortProperty, currentPage, dispatch]);
 
   const sushiList = items.map((item) => <SushiBLock key={item.id} {...item} />);
   const skeletonList = [...new Array(3)].map((_, i) => <Skeleton key={i} />);
@@ -43,6 +47,7 @@ const Home = () => {
         )}
         {status === "loading" ? skeletonList : sushiList}
       </div>
+      <Pagination />
     </div>
   );
 };

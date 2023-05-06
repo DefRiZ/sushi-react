@@ -6,9 +6,9 @@ import axios from "axios";
 export const fetchSushi = createAsyncThunk(
   "sushi/fetchSushi",
   async (params) => {
-    const { category, sortType } = params;
+    const { category, sortType, currentPage } = params;
     const { data } = await axios.get(
-      `https://6450e98be1f6f1bb22a255dc.mockapi.io/items?${category}&sortBy=${sortType}`
+      `https://6450e98be1f6f1bb22a255dc.mockapi.io/items?${category}&sortBy=${sortType}&page=${currentPage}&limit=4`
     );
     return data;
   }
