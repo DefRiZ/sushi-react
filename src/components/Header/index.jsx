@@ -2,13 +2,18 @@ import React from "react";
 import sushiLogo from "../../assets/img/sushi-logo.svg";
 //Router
 import { Link } from "react-router-dom";
+//Redux
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const { totalPrice, totalCount } = useSelector((state) => state.cart);
+  // //Загальна кількість ВСЬОГО товару зробив через редакс, але поки що краще залишу тут
+  // const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   return (
     <div className="header">
       <div className="container">
         <div className="header__logo">
-          <Link to="/">
+          <Link className="header__link" to="/">
             <img width="38" src={sushiLogo} alt="Pizza logo" />
             <div>
               <h1>React Sushi</h1>
@@ -18,7 +23,7 @@ const Header = () => {
         </div>
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
-            <span>0 грн.</span>
+            <span>{totalPrice} грн.</span>
             <div className="button__delimiter"></div>
             <svg
               width="18"
@@ -49,7 +54,7 @@ const Header = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>3</span>
+            <span>{totalCount}</span>
           </Link>
         </div>
       </div>

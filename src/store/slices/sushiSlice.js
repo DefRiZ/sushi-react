@@ -10,7 +10,6 @@ export const fetchSushi = createAsyncThunk(
     const { data } = await axios.get(
       `https://6450e98be1f6f1bb22a255dc.mockapi.io/items?${category}&sortBy=${sortType}`
     );
-    console.log(data);
     return data;
   }
 );

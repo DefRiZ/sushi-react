@@ -10,10 +10,8 @@ import { useDispatch } from "react-redux";
 import { fetchSushi } from "../store/slices/sushiSlice";
 
 const Home = () => {
-  // const [items, setItems] = React.useState([]);
   const dispatch = useDispatch();
   const { items, status } = useSelector((state) => state.sushi);
-  console.log(items);
   const { categoryId, sort } = useSelector((state) => state.filter);
   React.useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";

@@ -1,6 +1,26 @@
 import React from "react";
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../store/slices/cartSlice";
 
 const SushiBLock = ({ id, imageUrl, title, price, quantity, weight }) => {
+  const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.cart);
+  const addSushi = () => {
+    const item = {
+      id,
+      imageUrl,
+      title,
+      price,
+      quantity,
+      weight,
+    };
+    dispatch(addItem(item));
+  };
+  //Якщо знаходимо в массиві елемент с таким же айді - дістаємо в нього значення саунту.
+  const cartItem = items.find((obj) => obj.id === id);
+  const addedCount = cartItem ? cartItem.count : 0;
+
   return (
     <div className="sushi-block">
       <img className="sushi-block__image" src={imageUrl} alt="Sushi" />
@@ -15,7 +35,10 @@ const SushiBLock = ({ id, imageUrl, title, price, quantity, weight }) => {
       </div>
       <div className="sushi-block__bottom">
         <div className="sushi-block__price">{price} грн</div>
-        <div className="button button--outline button--add">
+        <button
+          onClick={() => addSushi()}
+          className="button button--outline button--add"
+        >
           <svg
             width="12"
             height="12"
@@ -29,8 +52,8 @@ const SushiBLock = ({ id, imageUrl, title, price, quantity, weight }) => {
             />
           </svg>
           <span>Додати</span>
-          <i>2</i>
-        </div>
+          {addedCount > 0 && <i>{addedCount}</i>}
+        </button>
       </div>
     </div>
   );
