@@ -13,22 +13,24 @@ import { fetchSushi } from "../store/slices/sushiSlice";
 const Home = () => {
   const dispatch = useDispatch();
   const { items, status } = useSelector((state) => state.sushi);
-  const { categoryId, sort, currentPage } = useSelector(
+  const { categoryId, sort, currentPage, searchValue } = useSelector(
     (state) => state.filter
   );
   React.useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const sortType = sort.sortProperty;
+    const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
       fetchSushi({
         category,
         sortType,
         currentPage,
+        search,
       })
     );
     window.scrollTo(0, 0);
-  }, [categoryId, sort.sortProperty, currentPage, dispatch]);
+  }, [categoryId, sort.sortProperty, currentPage, searchValue, dispatch]);
 
   const sushiList = items.map((item) => <SushiBLock key={item.id} {...item} />);
   const skeletonList = [...new Array(3)].map((_, i) => <Skeleton key={i} />);
