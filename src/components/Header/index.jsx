@@ -1,5 +1,6 @@
 import React from "react";
 import sushiLogo from "../../assets/img/sushi-logo.svg";
+import Search from "../Search";
 //Router
 import { Link } from "react-router-dom";
 //Redux
@@ -21,6 +22,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
+        <Search />
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>{totalPrice} грн.</span>
