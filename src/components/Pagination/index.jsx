@@ -8,7 +8,7 @@ const Pagination = () => {
   const dispatch = useDispatch();
   const { currentPage } = useSelector((state) => state.filter);
   return (
-    <>
+    <div className={styles.container}>
       <ReactPaginate
         className={styles.root}
         breakLabel="..."
@@ -20,7 +20,7 @@ const Pagination = () => {
         forcePage={currentPage - 1}
         renderOnZeroPageCount={null}
       />
-    </>
+    </div>
   );
 };
 

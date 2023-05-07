@@ -27,6 +27,7 @@ const Home = () => {
         currentPage,
       })
     );
+    window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, currentPage, dispatch]);
 
   const sushiList = items.map((item) => <SushiBLock key={item.id} {...item} />);
