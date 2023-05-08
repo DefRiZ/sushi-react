@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSortType } from "../../store/slices/filterSlice";
 //Створюємо динамічний список з елементами поп-апу
-const list = [
+export const list = [
   { name: "популярністю", sortProperty: "rating" },
   { name: "ціною", sortProperty: "price" },
   { name: "алфавітом", sortProperty: "title" },
