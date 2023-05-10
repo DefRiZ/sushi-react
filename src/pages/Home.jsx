@@ -48,7 +48,7 @@ const Home = () => {
   }, [categoryId, sort.sortProperty, currentPage, searchValue, dispatch]);
 
   const sushiList = items.map((item) => <SushiBLock key={item.id} {...item} />);
-  const skeletonList = [...new Array(3)].map((_, i) => <Skeleton key={i} />);
+  const skeletonList = [...new Array(4)].map((_, i) => <Skeleton key={i} />);
   return (
     <div>
       <div className="content__top">

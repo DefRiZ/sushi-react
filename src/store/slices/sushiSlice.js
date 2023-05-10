@@ -35,7 +35,7 @@ const sushiSlice = createSlice({
     },
     [fetchSushi.rejected]: (state, action) => {
       state.status = "error";
-      state.todos = [];
+      state.items = [];
     },
   },
 });
