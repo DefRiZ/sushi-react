@@ -3,6 +3,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../store/slices/cartSlice";
 
+import { Link } from "react-router-dom";
+
 const SushiBLock = ({ id, imageUrl, title, price, quantity, weight }) => {
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.cart);
@@ -17,22 +19,24 @@ const SushiBLock = ({ id, imageUrl, title, price, quantity, weight }) => {
     };
     dispatch(addItem(item));
   };
-  //Якщо знаходимо в массиві елемент с таким же айді - дістаємо в нього значення саунту.
+  //Якщо знаходимо в массиві елемент с таким же айді - дістаємо в нього значення каунту.
   const cartItem = items.find((obj) => obj.id === id);
   const addedCount = cartItem ? cartItem.count : 0;
 
   return (
     <div className="sushi-block">
-      <img className="sushi-block__image" src={imageUrl} alt="Sushi" />
-      <h4 className="sushi-block__title">{title}</h4>
-      <div className="sushi-block__selector">
-        <ul>
-          <li>{quantity} шт.</li>
-        </ul>
-        <ul>
-          <li>{weight} гр.</li>
-        </ul>
-      </div>
+      <Link to={`sushi/${id}`}>
+        <img className="sushi-block__image" src={imageUrl} alt="Sushi" />
+        <h4 className="sushi-block__title">{title}</h4>
+        <div className="sushi-block__selector">
+          <ul>
+            <li>{quantity} шт.</li>
+          </ul>
+          <ul>
+            <li>{weight} гр.</li>
+          </ul>
+        </div>
+      </Link>
       <div className="sushi-block__bottom">
         <div className="sushi-block__price">{price} грн</div>
         <button

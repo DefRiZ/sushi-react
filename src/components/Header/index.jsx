@@ -2,7 +2,7 @@ import React from "react";
 import sushiLogo from "../../assets/img/sushi-logo.svg";
 import Search from "../Search";
 //Router
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 //Redux
 import { useSelector } from "react-redux";
 
@@ -10,6 +10,8 @@ const Header = () => {
   const { totalPrice, totalCount } = useSelector((state) => state.cart);
   // //Загальна кількість ВСЬОГО товару зробив через редакс, але поки що краще залишу тут
   // const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const location = useLocation();
+
   return (
     <div className="header">
       <div className="container">
@@ -22,7 +24,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <Search />
+        {location.pathname === "/" && <Search />}
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>{totalPrice} грн.</span>
