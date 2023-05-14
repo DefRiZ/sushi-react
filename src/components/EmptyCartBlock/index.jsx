@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const EmptyCart = () => {
   return (
-    <div class="cart cart--empty">
+    <div className="cart cart--empty">
       <h2>
-        Кошик пустий <icon>😕</icon>
+        Кошик пустий <span>😕</span>
       </h2>
       <p>
         У вашій корзині ще немаю ролів.
@@ -14,7 +14,7 @@ const EmptyCart = () => {
         Щоб зробити замовлення - перейдіть на головну сторінку.
       </p>
       <img src={empty} alt="Empty cart" />
-      <Link to="/" class="button button--black">
+      <Link to="/" className="button button--black">
         <span>Повернутись назад</span>
       </Link>
     </div>

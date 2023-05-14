@@ -51,7 +51,7 @@ const SingleSushi = () => {
   return (
     <div className={styles.root}>
       <div>
-        <img src={imageUrl} />
+        <img src={imageUrl} alt="Суші" />
       </div>
       <div className={styles.about}>
         <h2 className={styles.title}>{title}</h2>

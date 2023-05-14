@@ -9,16 +9,28 @@ export const list = [
   { name: "алфавітом", sortProperty: "title" },
 ];
 
-const Sort = () => {
+const Sort = React.memo(() => {
   const { sort } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
   const onClickSort = (object) => {
     dispatch(setSortType(object));
   };
   //Функціонал відкр/закрити поп-ап
+  const sortRef = React.useRef();
   const [open, setOpen] = React.useState(false);
+  //Функціонал закриття поп-апу при кліку поза його межами
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setOpen(false);
+      }
+    };
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => document.body.removeEventListener("click", handleClickOutside);
+  }, []);
   return (
-    <div onClick={() => setOpen(!open)} className="sort">
+    <div onClick={() => setOpen(!open)} className="sort" ref={sortRef}>
       <div className="sort__label">
         <svg
           width="10"
@@ -54,6 +66,6 @@ const Sort = () => {
       )}
     </div>
   );
-};
+});
 
 export default Sort;

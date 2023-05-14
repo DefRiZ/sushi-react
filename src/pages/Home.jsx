@@ -10,13 +10,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchSushi } from "../store/slices/sushiSlice";
 
-import qs from "qs";
+// import qs from "qs";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { items, status } = useSelector((state) => state.sushi);
   const { categoryId, sort, currentPage, searchValue } = useSelector(
     (state) => state.filter
@@ -37,15 +37,15 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, currentPage, searchValue, dispatch]);
 
-  React.useEffect(() => {
-    const queryString = qs.stringify({
-      sortProperty: sort.sortProperty,
-      categoryId,
-      currentPage,
-    });
+  // React.useEffect(() => {
+  //   const queryString = qs.stringify({
+  //     sortProperty: sort.sortProperty,
+  //     categoryId,
+  //     currentPage,
+  //   });
 
-    navigate(`?${queryString}`);
-  }, [categoryId, sort.sortProperty, currentPage, searchValue, dispatch]);
+  //   navigate(`?${queryString}`);
+  // }, [categoryId, sort.sortProperty, currentPage, searchValue, dispatch]);
 
   const sushiList = items.map((item) => <SushiBLock key={item.id} {...item} />);
   const skeletonList = [...new Array(4)].map((_, i) => <Skeleton key={i} />);
