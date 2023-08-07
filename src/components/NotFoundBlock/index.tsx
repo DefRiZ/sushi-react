@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./NotFoundBlock.module.scss";
 
-const NotFoundBLock = () => {
+const NotFoundBLock: React.FC = () => {
   return (
     <div className={styles.root}>
       <h2 className={styles.text}>Вибачте, але такої сторінки не існує</h2>

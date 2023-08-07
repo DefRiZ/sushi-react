@@ -5,9 +5,12 @@ import Search from "../Search";
 import { Link, useLocation } from "react-router-dom";
 //Redux
 import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
-const Header = () => {
-  const { totalPrice, totalCount } = useSelector((state) => state.cart);
+const Header: React.FC = () => {
+  const { totalPrice, totalCount } = useSelector(
+    (state: RootState) => state.cart
+  );
   // //Загальна кількість ВСЬОГО товару зробив через редакс, але поки що краще залишу тут
   // const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const location = useLocation();

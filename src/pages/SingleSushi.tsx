@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 
 import styles from "./SingleSushi.module.scss";
 
-import { useDispatch } from "react-redux";
-import { addItem } from "../store/slices/cartSlice";
+import { addItem, itemsState } from "../store/slices/cartSlice";
+import { useAppDispatch } from "../store";
 
-const SingleSushi = () => {
-  const dispatch = useDispatch();
+const SingleSushi: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const [sushi, setSushi] = React.useState({
     id: "0",
     imageUrl: "",
@@ -20,17 +21,32 @@ const SingleSushi = () => {
     category: 0,
     rating: 0,
     description: "",
+    count: 0,
   });
   const { id } = useParams();
-  const { imageUrl, title, price, quantity, weight, description } = sushi;
+  const {
+    imageUrl,
+    title,
+    price,
+    quantity,
+    weight,
+    category,
+    rating,
+    description,
+    count,
+  } = sushi;
   const addSushi = () => {
-    const item = {
+    const item: itemsState = {
       id,
       imageUrl,
       title,
       price,
       quantity,
       weight,
+      category,
+      rating,
+      description,
+      count,
     };
     dispatch(addItem(item));
   };

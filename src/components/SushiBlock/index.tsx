@@ -1,21 +1,37 @@
 import React from "react";
 //Redux
-import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../store/slices/cartSlice";
+import { useSelector } from "react-redux";
+import { addItem, itemsState } from "../../store/slices/cartSlice";
 
 import { Link } from "react-router-dom";
+import { RootState, useAppDispatch } from "../../store";
 
-const SushiBLock = ({ id, imageUrl, title, price, quantity, weight }) => {
-  const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.cart);
+const SushiBLock: React.FC<itemsState> = ({
+  id,
+  imageUrl,
+  title,
+  price,
+  quantity,
+  weight,
+  category,
+  rating,
+  description,
+  count,
+}) => {
+  const dispatch = useAppDispatch();
+  const { items } = useSelector((state: RootState) => state.cart);
   const addSushi = () => {
-    const item = {
+    const item: itemsState = {
       id,
       imageUrl,
       title,
       price,
       quantity,
       weight,
+      category,
+      rating,
+      description,
+      count,
     };
     dispatch(addItem(item));
   };
