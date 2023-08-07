@@ -1,18 +1,74 @@
 import React from "react";
 //Redux
 import { useDispatch } from "react-redux";
-import { addItem, minusItem, removeItem } from "../../store/slices/cartSlice";
+import {
+  addItem,
+  itemsState,
+  minusItem,
+  removeItem,
+} from "../../store/slices/cartSlice";
+import { useAppDispatch } from "../../store";
 
-const CartItem = ({ id, imageUrl, title, price, quantity, weight, count }) => {
-  const dispatch = useDispatch();
+const CartItem: React.FC<itemsState> = ({
+  id,
+  imageUrl,
+  title,
+  price,
+  quantity,
+  weight,
+  category,
+  rating,
+  description,
+  count,
+}) => {
+  const dispatch = useAppDispatch();
   const onClickPlus = () => {
-    dispatch(addItem({ id }));
+    dispatch(
+      addItem({
+        id,
+        imageUrl,
+        title,
+        price,
+        quantity,
+        weight,
+        category,
+        rating,
+        description,
+        count,
+      })
+    );
   };
   const onClickMinus = () => {
-    dispatch(minusItem({ id }));
+    dispatch(
+      minusItem({
+        id,
+        imageUrl,
+        title,
+        price,
+        quantity,
+        weight,
+        category,
+        rating,
+        description,
+        count,
+      })
+    );
   };
   const onClickRemove = () => {
-    dispatch(removeItem({ id }));
+    dispatch(
+      removeItem({
+        id,
+        imageUrl,
+        title,
+        price,
+        quantity,
+        weight,
+        category,
+        rating,
+        description,
+        count,
+      })
+    );
   };
   return (
     <div className="cart__item">

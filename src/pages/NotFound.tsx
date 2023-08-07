@@ -2,7 +2,7 @@ import React from "react";
 
 import NotFoundBLock from "../components/NotFoundBlock";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return <NotFoundBLock />;
 };
 

@@ -1,13 +1,14 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setCategoryId } from "../../store/slices/filterSlice";
+import { RootState, useAppDispatch } from "../../store";
 //Створюємо динамічний список
 const categories = ["Всі", "Сети", "Роли", "Суші", "Вегетаріанські", "Гострі"];
-const Categories = React.memo(() => {
-  const dispatch = useDispatch();
-  const { categoryId } = useSelector((state) => state.filter);
+const Categories: React.FC = React.memo(() => {
+  const dispatch = useAppDispatch();
+  const { categoryId } = useSelector((state: RootState) => state.filter);
   const onClickCategory = React.useCallback(
-    (index) => {
+    (index: number) => {
       dispatch(setCategoryId(index));
     },
     [dispatch]

@@ -1,7 +1,8 @@
 import React from "react";
 //REDUX
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { setSortType } from "../../store/slices/filterSlice";
+import { RootState, useAppDispatch } from "../../store";
 //Створюємо динамічний список з елементами поп-апу
 export const list = [
   { name: "популярністю", sortProperty: "rating" },
@@ -9,19 +10,19 @@ export const list = [
   { name: "алфавітом", sortProperty: "title" },
 ];
 
-const Sort = React.memo(() => {
-  const { sort } = useSelector((state) => state.filter);
-  const dispatch = useDispatch();
-  const onClickSort = (object) => {
+const Sort: React.FC = React.memo(() => {
+  const { sort } = useSelector((state: RootState) => state.filter);
+  const dispatch = useAppDispatch();
+  const onClickSort = (object: { name: string; sortProperty: string }) => {
     dispatch(setSortType(object));
   };
   //Функціонал відкр/закрити поп-ап
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
   const [open, setOpen] = React.useState(false);
   //Функціонал закриття поп-апу при кліку поза його межами
   React.useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setOpen(false);
       }
     };
