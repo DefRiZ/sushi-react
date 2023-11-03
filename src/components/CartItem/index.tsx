@@ -1,6 +1,5 @@
 import React from "react";
 //Redux
-import { useDispatch } from "react-redux";
 import {
   addItem,
   itemsState,
